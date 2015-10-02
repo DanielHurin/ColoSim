@@ -1,14 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package array;
 
-/**
- *
- * @author Student
- */
+
 public class MajorGrid {
+    
+    public TileGrid[][] majorGrid;
+    
+    public MajorGrid(int width, int height){
+        generateRandom();
+    }
+    
+    public TileGrid getTileGrid(int column, int row){
+        return majorGrid[column][row];
+    }
+    
+    public void setTileGrid(int column, int row, TileGrid tileGrid){
+        majorGrid[column][row] = tileGrid;
+    }
+    
+    public void generateRandom(){
+        //TODO: Write Generation Code
+    }
     
 }
