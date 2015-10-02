@@ -1,4 +1,4 @@
-package gfx;
+package gfx.assets;
 
 
 public class Assets {

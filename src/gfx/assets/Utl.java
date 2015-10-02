@@ -1,5 +1,5 @@
 
-package gfx;
+package gfx.assets;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
