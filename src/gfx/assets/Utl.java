@@ -12,8 +12,7 @@ public class Utl {
     
     private static BufferedImage spriteSheet;
     
-    private static final int SPRITEWIDTH = 64;
-    private static final int SPRITEHEIGHT = 64;
+    private static final int SPRITESIZE = 64;
     
     public static void loadSpriteSheet(String path){
         try{
@@ -24,6 +23,10 @@ public class Utl {
     }
     
     public static BufferedImage makeSprite(int row, int column){
-        return spriteSheet.getSubimage(SPRITEWIDTH*row, SPRITEHEIGHT*column, SPRITEWIDTH, SPRITEHEIGHT);
+        return spriteSheet.getSubimage(SPRITESIZE*row, SPRITESIZE*column, SPRITESIZE, SPRITESIZE);
+    }
+    
+    public static int getSpriteSize(){
+        return SPRITESIZE;
     }
 }
