@@ -1,7 +1,9 @@
 
 package array;
 
+import gfx.assets.Utl;
 import gfx.gui.GameBoard;
+import utl.console.Console;
 
 
 public class MajorGrid {
@@ -11,7 +13,11 @@ public class MajorGrid {
     private static GameBoard gameBoard;
     
     public static void init(int width, int height){
-        generateRandom();
+        majorGrid = new TileGrid[width][height];
+        for(int x = 0; x < width; x++)
+            for(int y = 0; y < height; y++)
+                majorGrid[x][y] = new TileGrid();
+        gameBoard = new GameBoard(width*16*Utl.SPRITEDIMENSIONS,height*16*Utl.SPRITEDIMENSIONS);
     }
     
     public static TileGrid getTileGrid(int column, int row){
@@ -30,17 +36,19 @@ public class MajorGrid {
         MajorGrid.gameBoard = gameBoard;
     }
     
-    public static void generateRandom(){
-        //TODO: Write Generation Code
-    }
-    
-    public static void renderAll(){
+    public static void render(){
+        
+        final int SPRITEDIMENSION = Utl.SPRITEDIMENSIONS;
+        
         int[] xY = {0,0};  
-        for(int x = 0; x < majorGrid.length; x++)
+        for(int x = 0; x < majorGrid.length; x++){
             for(int y = 0; y < majorGrid[x].length; y++){
                 xY = majorGrid[x][y].renderTileGrid(xY);
             }
-        
+            xY[0] += SPRITEDIMENSION*majorGrid[x][0].getSize();
+            xY[1] = 0;
+        }
+        gameBoard.drawRender();
     }
     
 }

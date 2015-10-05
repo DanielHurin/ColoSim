@@ -1,7 +1,9 @@
 
 package array;
 
+import gfx.assets.SpriteSheet;
 import gfx.assets.Utl;
+import utl.console.Console;
 
 
 public class TileGrid {
@@ -16,6 +18,10 @@ public class TileGrid {
         this.tileGrid = tileGrid;
     }
     
+    public int getSize(){
+        return tileGrid.length;
+    }
+    
     public void setTile(int column, int row, Tile tile){
         tileGrid[column][row] = tile;
     }
@@ -24,11 +30,10 @@ public class TileGrid {
         return tileGrid[column][row];
     }
     
-    public void generateRandom(){
-        
+    private void generateRandom(){
         for(int x = 0; x < tileGrid.length; x++)
             for(int y = 0; y < tileGrid[x].length; y++){
-                tileGrid[x][y].generateTile();
+                tileGrid[x][y] = new Tile();
             }
     }
     
@@ -46,18 +51,18 @@ public class TileGrid {
         int xLoc = xY[0]; //x Location
         int yLoc = xY[1]; //y Location
         
-        final int SPRITEDIMENSION = Utl.getSpriteSize();
-        
-        final int SS = gfx.assets.Utl.getSpriteSize(); //SpriteSize
+        final int SPRITEDIMENSION = Utl.SPRITEDIMENSIONS;
         
         for(int x = 0; x < tileGrid.length; x++){            
             for(int y = 0; y < tileGrid.length; y++){
-                MajorGrid.getBoard().draw(tileGrid[x][y].render(),xLoc,yLoc);
+                if(tileGrid[x][y].getUpdate()){
+                    MajorGrid.getBoard().draw(tileGrid[x][y].render(),xLoc,yLoc);
+                }
                 xLoc+=SPRITEDIMENSION;
             }
             xLoc-=SPRITEDIMENSION*tileGrid[x].length;
             yLoc+=SPRITEDIMENSION;
-        }    
+        }
         int[] toReturn = {xLoc,yLoc};
         return toReturn;
     }
