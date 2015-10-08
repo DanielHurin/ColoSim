@@ -7,7 +7,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import utl.console.Console;
 
-
 public class SpriteSheet {
     
     private BufferedImage spriteSheet;

@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 public class Tile {
     
     private int type;
-    private boolean update = true;
     
     public Tile(){
         generateTile();
@@ -20,7 +19,7 @@ public class Tile {
     
     public void setType(int type){
         this.type = type;
-        this.update = true;
+        MajorGrid.setUpdate();
     }
     
     public int getType(){
@@ -32,14 +31,7 @@ public class Tile {
     
     private void generateTile(){
         this.type = (int)(Math.random()*(3));
-    }
-    
-    public void setUpdate(){
-        this.update = true;
-    }
-    
-    public boolean getUpdate(){
-        return update;
+        MajorGrid.setUpdate();
     }
     
     /**
@@ -47,7 +39,6 @@ public class Tile {
      * @return 
      */
     public BufferedImage render(){
-        this.update = false;
         switch(type){
             case 0: //Grass
                 return Assets.grass.getSprite();

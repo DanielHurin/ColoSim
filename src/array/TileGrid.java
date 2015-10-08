@@ -18,8 +18,8 @@ public class TileGrid {
         this.tileGrid = tileGrid;
     }
     
-    public int getSize(){
-        return tileGrid.length;
+    public Tile[][] getTileGrid(){
+        return tileGrid;
     }
     
     public void setTile(int column, int row, Tile tile){
@@ -43,6 +43,7 @@ public class TileGrid {
      * @param xY The user must pass in a two long array of Ints: the first is x, the second is Y.
      * @return 
      */
+    @Deprecated
     public int[] renderTileGrid(int[] xY){
         
         if(xY.length!=2||MajorGrid.getBoard()==null)
@@ -55,9 +56,7 @@ public class TileGrid {
         
         for(int x = 0; x < tileGrid.length; x++){            
             for(int y = 0; y < tileGrid.length; y++){
-                if(tileGrid[x][y].getUpdate()){
-                    MajorGrid.getBoard().draw(tileGrid[x][y].render(),xLoc,yLoc);
-                }
+                MajorGrid.getBoard().draw(tileGrid[x][y].render(),xLoc,yLoc);
                 xLoc+=SPRITEDIMENSION;
             }
             xLoc-=SPRITEDIMENSION*tileGrid[x].length;

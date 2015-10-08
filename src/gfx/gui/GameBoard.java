@@ -1,23 +1,34 @@
 package gfx.gui;
 
+import array.MajorGrid;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.MouseInfo;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import utl.console.Console;
 
 public class GameBoard extends JFrame{
     
     private Canvas canvas;
     private JPanel panel;
     
+    private int x = 0;
+    private int y = 0;
+    
+    private int oldX = 0;
+    private int oldY = 0;
+    
     private int width;
     private int height;
     
-    private Graphics g;
-    private BufferStrategy bs;
+    private volatile Graphics g;
+    private volatile BufferStrategy bs;
+    
+    private static volatile int[] offsets = {0,0};
     
     private boolean inited = false;
     
@@ -32,48 +43,54 @@ public class GameBoard extends JFrame{
         this.setVisible(true);
         this.setPreferredSize(new Dimension(this.width,this.height));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(null);
+        
+        panel = new JPanel();
+        panel.setPreferredSize(new Dimension(this.width,this.height));
+        panel.setBounds(0,0,this.width,this.height);
+        panel.setLayout(null);
         
         canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(this.width,this.height));
+        canvas.setBounds(0, 0, canvas.getPreferredSize().width, canvas.getPreferredSize().height);
                 
-        this.add(canvas);
+        panel.add(canvas);
         
+        this.add(panel);
         this.pack();
-        while(!inited){
-            inited = initPart2();
-        }
     }
     
-    private boolean initPart2(){
+    public Dimension getCanvasSize(){
+        return this.canvas.getSize();
+    }
+    
+    public boolean isInited(){
+        return this.inited;
+    }
+    
+    public boolean newRenderStart(){
         bs = canvas.getBufferStrategy();
         if(bs==null){
             canvas.createBufferStrategy(3);
             return false;
         }
         g = bs.getDrawGraphics();
-        bs.show();
-        bs.show();
+        this.inited = true;
         return true;
     }
     
-    public void resize(int width, int height){
-        this.width = width;
-        this.height = height;
-        if(inited){
-            this.setPreferredSize(new Dimension(this.width,this.height));
-        }
-        //Make a Call to Configs to get WindowSize 
+    public void newRenderEnd(){
+        bs.show();
+        bs.show();
+        g.clearRect(0, 0, canvas.getPreferredSize().width, canvas.getPreferredSize().height);
+        g.dispose();
+        this.inited = false;
     }
     
     public void draw(BufferedImage bI, int xLoc, int yLoc){
         if(inited){
-            g.drawImage(bI, xLoc, yLoc, null);
+            g.drawImage(bI, xLoc, yLoc, this.canvas);
         }
     }
     
-    public void drawRender(){
-        if(inited){
-            bs.show();
-        }
-    }
 }

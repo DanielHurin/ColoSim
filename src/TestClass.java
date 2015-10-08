@@ -5,7 +5,7 @@ import utl.console.Console;
 
 public class TestClass {
     
-    public static GameboardState GBS = new GameboardState();
+    public static volatile GameboardState GBS = new GameboardState();
     
     
     public static void main(String[] args) {
