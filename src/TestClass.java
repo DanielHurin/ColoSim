@@ -1,7 +1,7 @@
 
-import array.MajorGrid;
+import gfx.assets.Assets;
+import javax.swing.JFrame;
 import states.GameboardState;
-import utl.console.Console;
 
 public class TestClass {
     
@@ -11,6 +11,14 @@ public class TestClass {
     public static void main(String[] args) {
         //==InitMajorGrid==\\
     
+        JFrame frame = new JFrame();
+        frame.setLayout(null);
+        frame.add(Assets.test);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.pack();
+        
+        /*
         MajorGrid.init(2,2);
         
         GBS.start();
@@ -21,6 +29,7 @@ public class TestClass {
             Console.flag("Error Sleeping Main Thread", iE);
         }
         MajorGrid.getTileGrid(0,0).getTile(0,0).setType(3);
+        */
     }
     
 }
