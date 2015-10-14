@@ -1,5 +1,5 @@
 
-import gfx.assets.Assets;
+import gfx.gui.components.buttons.TestButton;
 import javax.swing.JFrame;
 import states.GameboardState;
 
@@ -9,12 +9,17 @@ public class TestClass {
     
     
     public static void main(String[] args) {
+        
+        //==TestButtons==\\
+        
+        TestButton test = new TestButton("A simple test Button");
+        
         //==InitMajorGrid==\\
     
         JFrame frame = new JFrame();
         frame.setLayout(null);
-        frame.add(Assets.test);
         frame.setVisible(true);
+        frame.add(test.getComponent());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         

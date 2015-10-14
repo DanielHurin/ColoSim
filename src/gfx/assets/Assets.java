@@ -1,9 +1,5 @@
 package gfx.assets;
 
-import gfx.gui.Components.ClickButtons.*;
-import gfx.gui.Components.ClickButtonCircle;
-
-
 public class Assets {
     
     //Sprite X Y is scaled in Utl!
@@ -17,8 +13,6 @@ public class Assets {
     public static final Sprite plains = new Sprite(0,1,terrainSheet);
     public static final Sprite forest = new Sprite(1,0,terrainSheet);
     public static final Sprite ocean = new Sprite(1,1,terrainSheet);
-    
-    public static final ClickButtonCircle test = new Test(buttonSheet.makeButtonFancy(0, 0));
     
     //==Nothing Should Be Put Beyond This Line==\\
     
