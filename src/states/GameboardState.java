@@ -56,13 +56,15 @@ public class GameboardState extends State{
         int yLoc = MouseInfo.getPointerInfo().getLocation().y;
         
         int PPM = 8;
+        
         if(!(xLoc <= MajorGrid.getBoard().getLocationOnScreen().x)&&!(xLoc >= MajorGrid.getBoard().getLocationOnScreen().x+MajorGrid.getBoard().getSize().width)&&
            !(yLoc <= MajorGrid.getBoard().getLocationOnScreen().y)&&!(yLoc >= MajorGrid.getBoard().getLocationOnScreen().y+MajorGrid.getBoard().getSize().height)){
+            
             if(yLoc<=dBY && offsets[1]+PPM <= 0)
                 offsets[1] += PPM;
             if(xLoc<=dBX && offsets[0]+PPM <= 0)
                 offsets[0] += PPM;
-            if(yLoc>=MajorGrid.getBoard().getSize().height-dBY && Math.abs(offsets[1]+PPM)+MajorGrid.getBoard().getSize().height <= this.offsetLimit.y+MajorGrid.getBoard().getInsets().top)
+            if(yLoc>=MajorGrid.getBoard().getSize().height-dBY && Math.abs(offsets[1]+PPM)+MajorGrid.getBoard().getSize().height <= this.offsetLimit.y-MajorGrid.getBoard().getInsets().top)
                 offsets[1] -= PPM;
             if(xLoc>=MajorGrid.getBoard().getSize().width-dBX && Math.abs(offsets[0]+PPM)+MajorGrid.getBoard().getSize().width <= this.offsetLimit.x)
                 offsets[0] -= PPM;
@@ -71,7 +73,7 @@ public class GameboardState extends State{
     
     @Override
     public void render() {
-        if((offsetsOld[0]!=offsets[0])||(offsetsOld[1]!=offsets[1])||MajorGrid.getUpdate())
+        if(((offsetsOld[0]!=offsets[0])||(offsetsOld[1]!=offsets[1])||MajorGrid.getUpdate())||(offsetLimit.y==0))
             MajorGrid.render(offsets);
         offsetsOld[0]=offsets[0];
         offsetsOld[1]=offsets[1];

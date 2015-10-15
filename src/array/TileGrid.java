@@ -1,21 +1,35 @@
 
 package array;
 
-import gfx.assets.SpriteSheet;
-import gfx.assets.Utl;
 import utl.console.Console;
 
 
 public class TileGrid {
     
     private Tile[][] tileGrid = new Tile[16][16];
+    private final TileGridFlavor tileGridFlavor;
+    
+    public static enum TileGridFlavor{
+        LAND,OCEAN;
+    }
     
     public TileGrid(){
+        tileGridFlavor = randomFlavor();
+        generateRandom();
+    }
+    
+    public TileGrid(TileGridFlavor tileGridFlavor){
+        this.tileGridFlavor = tileGridFlavor;
         generateRandom();
     }
     
     public TileGrid(Tile[][] tileGrid){
+        this.tileGridFlavor = randomFlavor();
         this.tileGrid = tileGrid;
+    }
+    
+    public TileGridFlavor getFlavor(){
+        return this.tileGridFlavor;
     }
     
     public Tile[][] getTileGrid(){
@@ -30,39 +44,15 @@ public class TileGrid {
         return tileGrid[column][row];
     }
     
+    private TileGridFlavor randomFlavor(){
+        return TileGridFlavor.values()[(int)((Math.random())*TileGridFlavor.values().length)];
+    }
+    
     private void generateRandom(){
         for(int x = 0; x < tileGrid.length; x++)
             for(int y = 0; y < tileGrid[x].length; y++){
-                tileGrid[x][y] = new Tile();
+                tileGrid[x][y] = new Tile(this.tileGridFlavor);
             }
     }
     
-    /**
-     * Use this method to draw a section of the board.  It will draw directly to the GameBoard,
-     * and will not draw if it does not exist.
-     * @param xY The user must pass in a two long array of Ints: the first is x, the second is Y.
-     * @return 
-     */
-    @Deprecated
-    public int[] renderTileGrid(int[] xY){
-        
-        if(xY.length!=2||MajorGrid.getBoard()==null)
-            return null;
-        
-        int xLoc = xY[0]; //x Location
-        int yLoc = xY[1]; //y Location
-        
-        final int SPRITEDIMENSION = Utl.SPRITEDIMENSIONS;
-        
-        for(int x = 0; x < tileGrid.length; x++){            
-            for(int y = 0; y < tileGrid.length; y++){
-                MajorGrid.getBoard().draw(tileGrid[x][y].render(),xLoc,yLoc);
-                xLoc+=SPRITEDIMENSION;
-            }
-            xLoc-=SPRITEDIMENSION*tileGrid[x].length;
-            yLoc+=SPRITEDIMENSION;
-        }
-        int[] toReturn = {xLoc,yLoc};
-        return toReturn;
-    }
 }

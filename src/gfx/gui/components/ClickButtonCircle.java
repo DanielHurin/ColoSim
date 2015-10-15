@@ -1,17 +1,14 @@
 package gfx.gui.components;
 
 import gfx.assets.Assets;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public abstract class ClickButtonCircle extends AbstractAction implements ComponentListener{
+public abstract class ClickButtonCircle extends AbstractAction{
     
     private final ImageIcon baseIcon;
     private final ImageIcon clickedIcon;
@@ -39,23 +36,6 @@ public abstract class ClickButtonCircle extends AbstractAction implements Compon
     
     @Override
     public abstract void actionPerformed(ActionEvent e);
-    
-    
-    @Override
-    public void componentResized(ComponentEvent ce) {
-    }
-
-    @Override
-    public void componentMoved(ComponentEvent ce) {
-    }
-
-    @Override
-    public void componentShown(ComponentEvent ce) {
-    }
-
-    @Override
-    public void componentHidden(ComponentEvent ce) {
-    }
     
     public Component getComponent(){
         return this.component;

@@ -1,7 +1,8 @@
 
-import gfx.gui.components.buttons.TestButton;
-import javax.swing.JFrame;
+import array.MajorGrid;
+import array.Tile;
 import states.GameboardState;
+import utl.console.Console;
 
 public class TestClass {
     
@@ -12,18 +13,22 @@ public class TestClass {
         
         //==TestButtons==\\
         
-        TestButton test = new TestButton("A simple test Button");
+        //TestButton test = new TestButton("A simple test Button");
         
-        //==InitMajorGrid==\\
+        //==InitTestButtonFrame==\\
     
+        /*
         JFrame frame = new JFrame();
         frame.setLayout(null);
         frame.setVisible(true);
         frame.add(test.getComponent());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
+        */
         
-        /*
+        //==InitTestMajorGrid==\\
+        
+        
         MajorGrid.init(2,2);
         
         GBS.start();
@@ -33,8 +38,8 @@ public class TestClass {
         }catch(InterruptedException iE){
             Console.flag("Error Sleeping Main Thread", iE);
         }
-        MajorGrid.getTileGrid(0,0).getTile(0,0).setType(3);
-        */
+        MajorGrid.getTileGrid(0,0).getTile(0,0).setType(Tile.TileType.OCEAN);
+        
     }
     
 }
